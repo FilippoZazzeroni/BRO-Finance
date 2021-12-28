@@ -1,3 +1,6 @@
+import 'package:brofinance/managers/auth/auth.dart';
+import 'package:brofinance/managers/auth/auth_exception.dart';
+import 'package:brofinance/mixins/loadable.dart';
 import 'package:brofinance/mixins/navigatable.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/reusableComponents/form/auth_form.dart';
@@ -6,23 +9,27 @@ import 'package:brofinance/ui/reusableComponents/shapes/shape_size.dart';
 import 'package:brofinance/ui/shared/colors/website_colors.dart';
 import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'user_view.dart';
 
-class AuthView extends StatelessWidget with Navigatable {
+class AuthView extends StatefulWidget  {
 
   //MARK: init
 
   AuthView({Key? key}) : super(key: key);
 
-  //MARK: properties
+  @override
+  State<AuthView> createState() => _AuthViewState();
+}
 
+class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
+  //MARK: properties
   String _email = "";
 
   String _password = "";
 
   //MARK: methods
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,13 +64,25 @@ class AuthView extends StatelessWidget with Navigatable {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    onPressed: () {
-                      pushRoute(context, const UserView());
+                    onPressed: () async {
+
+                      try {
+                        setStateOfLoading(setState);
+                        await Auth.shared.signInWithEmailPassword(_email, _password);
+                        setStateOfLoading(setState);
+                        pushRoute(context, const UserView());
+                      } on AuthException catch (e) {
+                        Fluttertoast.showToast(msg: e.message, timeInSecForIosWeb: 2);
+                        setStateOfLoading(setState);
+                      }
                     },
-                    child: Text("Sign in", style: CurrencyStyle.description,)),
+                    child: isLoading ? const Coin(radius: 50.0,) : Text("Sign in", style: CurrencyStyle.description,)),
                 TextButton(
-                    onPressed: () {
-                      pushRoute(context, const UserView());
+                    onPressed: () async {
+                      setStateOfLoading(setState);
+                      await Auth.shared.signUpWithEmailPassword(_email, _password);
+                      setStateOfLoading(setState);
+                      Fluttertoast.showToast(msg: "Verification email sent", timeInSecForIosWeb: 2);
                     },
                     child: Text("Sign up", style: CurrencyStyle.description,)),
               ],

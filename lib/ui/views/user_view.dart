@@ -1,9 +1,10 @@
 
+import 'package:brofinance/managers/auth/auth.dart';
+import 'package:brofinance/managers/data_provider.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/rectangle_with_gradient.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/shape_size.dart';
-import 'package:brofinance/ui/reusableComponents/topBar/top_bar.dart';
-import 'package:brofinance/ui/reusableComponents/topBar/top_bar_size.dart';
+import 'package:brofinance/ui/reusableComponents/topBar/top_bar_logged.dart';
 import 'package:brofinance/ui/shared/colors/website_colors.dart';
 import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:flutter/material.dart';
@@ -25,11 +26,12 @@ class UserView extends StatelessWidget {
         gradient: SColors.getGradient(SColors.primaryColor, SColors.secondaryColor),
         child: Column(
           children: [
-            TopBar(style: CurrencyStyle.description, size: TopBarSize(100.0)),
+            TopBarLogged(),
             const SizedBox(height: 30.0,),
             Coin(radius: MediaQuery.of(context).size.height / 3),
+            const SizedBox(height: 30.0,),
             Text("Filippo Zazzeroni", style: CurrencyStyle.description, textAlign: TextAlign.center,),
-            Text("Current equity value in \$", style: CurrencyStyle.getDescriptionFrom(Colors.greenAccent), textAlign: TextAlign.center)
+            Text("Current equity value is ${Auth.shared.user!.equityInDollars} \$", style: CurrencyStyle.getDescriptionFrom(Colors.greenAccent), textAlign: TextAlign.center)
           ],
         ),
       ),
