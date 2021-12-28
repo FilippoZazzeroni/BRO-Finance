@@ -1,4 +1,6 @@
 
+import 'package:brofinance/mixins/navigatable.dart';
+import 'package:brofinance/ui/views/landing_view.dart';
 import 'package:flutter/material.dart';
 
 class Coin extends StatefulWidget {
@@ -15,25 +17,38 @@ class Coin extends StatefulWidget {
   _CoinState createState() => _CoinState();
 }
 
-class _CoinState extends State<Coin> with SingleTickerProviderStateMixin {
+class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Navigatable {
 
-  late final AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
     _controller = AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    _controller?.repeat();
     super.initState();
   }
 
   @override
+  void dispose() {
+    _controller?.dispose();
+    _controller = null;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      height: widget.radius,
-      width: widget.radius,
-      child: RotationTransition(
-        turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-        child: Image.asset("assets/images.logo.png"),
+    return GestureDetector(
+      onTap: () {
+        pushRoute(context, LandingView());
+      },
+      child: Container(
+        color: Colors.transparent,
+        height: widget.radius,
+        width: widget.radius,
+        child: RotationTransition(
+          turns: Tween(begin: 0.0, end: 1.0).animate(_controller!),
+          child: Image.asset("assets/images/logo.png"),
+        ),
       ),
     );
   }

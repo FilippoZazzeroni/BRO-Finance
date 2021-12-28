@@ -7,7 +7,7 @@ extension CurrencyStyle on TextStyle {
   //MARK: properties
 
   /// white text color
-  static final title = CurrencyStyle.getDescriptionFrom(Colors.white);
+  static final title = CurrencyStyle.getTitleFrom(Colors.white);
 
   /// white text color
   static final description = CurrencyStyle.getDescriptionFrom(Colors.white);
