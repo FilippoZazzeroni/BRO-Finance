@@ -1,6 +1,5 @@
 
 import 'package:brofinance/managers/data_provider.dart';
-import 'package:brofinance/mixins/global_context.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/circle_with_gradient.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/rectangle_with_gradient.dart';
@@ -15,13 +14,13 @@ class LandingView extends StatelessWidget {
 
   //MARK: init
 
-  LandingView({Key? key}) : super(key: key);
+  const LandingView({Key? key}) : super(key: key);
 
   //MARK: methods
 
   @override
   Widget build(BuildContext context) {
-
+    DataProvider.shared;
     DataProvider.shared.context = context;
 
     return Scaffold(
@@ -35,7 +34,7 @@ class LandingView extends StatelessWidget {
 
           ListView(
             children:  [
-              Container(
+              SizedBox(
                 height: ShapeSize.fullScreen(context).height,
                 width: ShapeSize.fullScreen(context).width,
                 child: Column(

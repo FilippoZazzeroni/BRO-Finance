@@ -21,13 +21,13 @@ class TopBarLogged extends TopBar {
           children: [
             TopBarButton(
               onPressed: () {
-                pushRoute(context, LandingView());
+                pushRoute(context, const LandingView());
               },
               text: "home",
             ),
             TopBarButton(
               onPressed: () {
-                pushRoute(context, LandingView());
+                pushRoute(context, const LandingView());
               },
               text: "log out",
             ),

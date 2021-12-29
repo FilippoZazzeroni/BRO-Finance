@@ -1,0 +1,21 @@
+
+[
+  {
+    "symbol": "BTCUSDT",
+    "currency1": "BTC",
+    "currency2": "USDT",
+    "order": 0.00162193
+  },
+  {
+    "symbol": "BNBUSDT",
+    "currency1": "BNB",
+    "currency2": "USDT",
+    "order": 0.15666114
+  },
+  {
+    "symbol": "ETHUSDT",
+    "currency1": "ETH",
+    "currency2": "USDT",
+    "order": 0.00886238
+  }
+]

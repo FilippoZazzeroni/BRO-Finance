@@ -10,6 +10,7 @@ class STGUser {
 
   final String uuid;
   final double equityInDollars;
+  final double totalDollars = 911.0;
   final String email;
   final String name;
 

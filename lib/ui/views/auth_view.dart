@@ -17,7 +17,7 @@ class AuthView extends StatefulWidget  {
 
   //MARK: init
 
-  AuthView({Key? key}) : super(key: key);
+  const AuthView({Key? key}) : super(key: key);
 
   @override
   State<AuthView> createState() => _AuthViewState();
@@ -35,7 +35,7 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
     return Scaffold(
       body: RectangleWithGradient(
         size: ShapeSize.fullScreen(context),
-        gradient: SColors.getGradient(SColors.primaryColor, SColors.secondaryColor),
+        gradient: SColors.getGradient(SColors.redDark, SColors.blueDark),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -68,10 +68,10 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
 
                       try {
                         setStateOfLoading(setState);
-                        await Auth.shared.signInWithEmailPassword(_email, _password);
+                        await Auth.shared.signInWithEmailPassword("filippo.zazzeroni@gmail.com", "testtest");
                         setStateOfLoading(setState);
                         pushRoute(context, const UserView());
-                      } on AuthException catch (e) {
+                      } on STGAuthException catch (e) {
                         Fluttertoast.showToast(msg: e.message, timeInSecForIosWeb: 2);
                         setStateOfLoading(setState);
                       }

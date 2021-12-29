@@ -1,11 +1,10 @@
 
-import 'package:brofinance/managers/auth/auth.dart';
 
-class AuthException implements Exception {
+class STGAuthException implements Exception {
 
   //MARK: init
 
-  AuthException({required this.code,required this.message});
+  STGAuthException({required this.code,required this.message});
 
   //MARK: properties
 

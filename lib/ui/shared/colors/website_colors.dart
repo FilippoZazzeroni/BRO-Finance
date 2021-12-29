@@ -7,6 +7,10 @@ extension SColors on Color {
 
   static const secondaryColor = Color.fromRGBO(69, 202, 255, 1.0);
 
+  static const redDark = Color.fromRGBO(241, 81, 94, 1.0);
+
+  static const blueDark = Color.fromRGBO(16, 55, 131, 1.0);
+
   //MARK: methods
 
   static LinearGradient getGradient(Color primary, Color secondary,

@@ -7,11 +7,13 @@ class Coin extends StatefulWidget {
 
   //MARK: init
 
-  const Coin({Key? key, required this.radius}) : super(key: key);
+  const Coin({Key? key, required this.radius, this.asset = "assets/images/logo.png"}) : super(key: key);
 
   //MARK: properties
 
   final double radius;
+
+  final String asset;
 
   @override
   _CoinState createState() => _CoinState();
@@ -39,7 +41,7 @@ class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Naviga
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushRoute(context, LandingView());
+        pushRoute(context, const LandingView());
       },
       child: Container(
         color: Colors.transparent,
@@ -47,7 +49,7 @@ class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Naviga
         width: widget.radius,
         child: RotationTransition(
           turns: Tween(begin: 0.0, end: 1.0).animate(_controller!),
-          child: Image.asset("assets/images/logo.png"),
+          child: Image.asset(widget.asset),
         ),
       ),
     );

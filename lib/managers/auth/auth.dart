@@ -39,22 +39,22 @@ class Auth {
       final userCred = await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email, password: password);
       if (!userCred.user!.emailVerified) {
-        throw AuthException(code: 1200, message: "Email not verified");
+        throw STGAuthException(code: 1200, message: "Email not verified");
       }
       final userData = await FirebaseFirestore.instance.collection("Users").doc(
           userCred.user!.uid).get();
       user = STGUser.fromMap(userData.data()!);
-    } on AuthException catch (e) {
+    } on STGAuthException catch (_) {
       rethrow;
     } catch(e) {
-      throw AuthException(code: 400, message: "Error in the login try again or check credentials");
+      throw STGAuthException(code: 400, message: "Error in the login try again or check credentials");
     }
 
   }
 
   Future signUpWithEmailPassword(String email, String password) async {
     final userCred = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-    await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+    FirebaseAuth.instance.currentUser!.sendEmailVerification();
     user = STGUser(email: email, equityInDollars: 222, uuid: userCred.user!.uid, name: "Test");
     FirebaseFirestore.instance.collection("Users").doc(user!.uuid).set(user!.toMap());
   }

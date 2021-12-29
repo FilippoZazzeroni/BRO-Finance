@@ -1,10 +1,6 @@
 import 'package:brofinance/mixins/global_context.dart';
 import 'package:brofinance/mixins/navigatable.dart';
 import 'package:brofinance/ui/shared/currency_text_style.dart';
-import 'package:brofinance/ui/views/auth_view.dart';
-import 'package:brofinance/ui/views/crypto_service_view.dart';
-import 'package:brofinance/ui/views/landing_view.dart';
-import 'package:brofinance/ui/views/use_cases_view.dart';
 import 'package:flutter/material.dart';
 
 class TopBarButton extends StatelessWidget with Navigatable, GlobalContext {
@@ -15,7 +11,7 @@ class TopBarButton extends StatelessWidget with Navigatable, GlobalContext {
 
   //MARK: properties
 
-  Function onPressed;
+  final Function onPressed;
 
   final String text;
 
