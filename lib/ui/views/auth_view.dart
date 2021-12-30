@@ -11,7 +11,7 @@ import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'user_view.dart';
+import 'user/user_view.dart';
 
 class AuthView extends StatefulWidget  {
 
@@ -68,7 +68,7 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
 
                       try {
                         setStateOfLoading(setState);
-                        await Auth.shared.signInWithEmailPassword("filippo.zazzeroni@gmail.com", "testtest");
+                        await Auth.shared.signInWithEmailPassword(_email, _password);
                         setStateOfLoading(setState);
                         pushRoute(context, const UserView());
                       } on STGAuthException catch (e) {

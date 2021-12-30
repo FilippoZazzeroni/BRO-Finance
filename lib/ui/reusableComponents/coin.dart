@@ -1,5 +1,10 @@
 
+import 'package:brofinance/managers/auth/auth.dart';
 import 'package:brofinance/mixins/navigatable.dart';
+import 'package:brofinance/ui/reusableComponents/topBar/top_bar.dart';
+import 'package:brofinance/ui/reusableComponents/topBar/top_bar_logged.dart';
+import 'package:brofinance/ui/reusableComponents/topBar/top_bar_size.dart';
+import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:brofinance/ui/views/landing_view.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +46,7 @@ class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Naviga
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        pushRoute(context, const LandingView());
+            pushRoute(context, LandingView(topBar: Auth.shared.user == null ? TopBar(style: CurrencyStyle.title, size: TopBarSize.standard()) : TopBarLogged()),);
       },
       child: Container(
         color: Colors.transparent,

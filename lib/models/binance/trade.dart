@@ -20,6 +20,6 @@ class Trade {
   //MARK: methods
 
   double getAmountInDollarsOfTrade(STGUser user) {
-    return (user.equityInDollars / user.totalDollars) * order.numberOfCoins * price;
+    return user.equityInPercentage * order.numberOfCoins * price;
   }
 }

@@ -10,12 +10,108 @@
     "symbol": "BNBUSDT",
     "currency1": "BNB",
     "currency2": "USDT",
-    "order": 0.15666114
+    "order": 0.07824709
   },
   {
     "symbol": "ETHUSDT",
     "currency1": "ETH",
     "currency2": "USDT",
     "order": 0.00886238
+  },
+  {
+    "symbol": "ADAUSDT",
+    "currency1": "ADA",
+    "currency2": "USDT",
+    "order": 83.3
+  },
+  {
+    "symbol": "MANAUSDT",
+    "currency1": "MANA",
+    "currency2": "USDT",
+    "order": 22.0
+  },
+  {
+    "symbol": "SOLUSDT",
+    "currency1": "SOL",
+    "currency2": "USDT",
+    "order": 0.26
+  },
+  {
+    "symbol": "SANDUSDT",
+    "currency1": "SAND",
+    "currency2": "USDT",
+    "order": 7.00
+  },
+  {
+    "symbol": "AVAXUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 0.21
+  },
+  {
+    "symbol": "CTXCUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 182.0
+  },
+  {
+    "symbol": "MATICUSDT",
+    "currency1": "BTC",
+    "currency2": "USDT",
+    "order": 33.3
+  },
+  {
+    "symbol": "GXSUSDT",
+    "currency1": "SOL",
+    "currency2": "USDT",
+    "order": 26.0
+  },
+  {
+    "symbol": "GTCUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 3.10
+  },
+  {
+    "symbol": "OOKIUSDT",
+    "currency1": "ETH",
+    "currency2": "USDT",
+    "order": 991.0
+  },
+  {
+    "symbol": "ANTUSDT",
+    "currency1": "MANA",
+    "currency2": "USDT",
+    "order": 2.70
+  },
+  {
+    "symbol": "DOTUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 1.16
+  },
+  {
+    "symbol": "FARMUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 0.207
+  },
+  {
+    "symbol": "GALAUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 45.0
+  },
+  {
+    "symbol": "AXSUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 0.12
+  },
+  {
+    "symbol": "DOCKUSDT",
+    "currency1": "AVAX",
+    "currency2": "USDT",
+    "order": 400.0
   }
 ]

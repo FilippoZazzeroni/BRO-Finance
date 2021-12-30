@@ -5,6 +5,7 @@ import 'package:brofinance/ui/reusableComponents/shapes/shape_size.dart';
 import 'package:brofinance/ui/reusableComponents/topBar/top_bar_button.dart';
 import 'package:brofinance/ui/reusableComponents/topBar/top_bar_size.dart';
 import 'package:brofinance/ui/shared/colors/website_colors.dart';
+import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:brofinance/ui/views/auth_view.dart';
 import 'package:brofinance/ui/views/crypto_service_view.dart';
 import 'package:brofinance/ui/views/landing_view.dart';
@@ -43,7 +44,7 @@ class TopBar extends StatelessWidget with Navigatable {
                 TopBarButton(
                   text: "home",
                   onPressed: () {
-                  pushRoute(context, const LandingView());
+                  pushRoute(context, LandingView(topBar: TopBar(style: CurrencyStyle.title, size: TopBarSize.standard(),),));
                 },),
                 TopBarButton(
                   text: "use cases",

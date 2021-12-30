@@ -4,6 +4,7 @@ import 'package:brofinance/models/user_stg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth {
 
@@ -19,8 +20,8 @@ class Auth {
 
   //MARK: methods
 
-  static void initialize() {
-    Firebase.initializeApp(
+  Future initialize() async {
+    await Firebase.initializeApp(
       options: FirebaseOptions.fromMap(const {
         "apiKey": "AIzaSyAj2yOo2PBCgqVhvSkD-8qK4URpyWqn-Kc",
         "authDomain": "stg-backand.firebaseapp.com",
@@ -31,6 +32,19 @@ class Auth {
         "measurementId": "G-LGZQD1KBFL"
       })
     );
+    final pref = await SharedPreferences.getInstance();
+    final isLogged = pref.get("isLogged");
+    if (isLogged != null) {
+      if (isLogged as bool) {
+        final uuid = pref.get("userId") as String;
+        return _getSignedUser(uuid);
+      }
+    }
+  }
+
+  Future _getSignedUser(String uuid) async {
+    final userData = await FirebaseFirestore.instance.collection("Users").doc(uuid).get();
+    user = STGUser.fromMap(userData.data()!);
   }
 
   /// Throws Auth Exception
@@ -44,6 +58,9 @@ class Auth {
       final userData = await FirebaseFirestore.instance.collection("Users").doc(
           userCred.user!.uid).get();
       user = STGUser.fromMap(userData.data()!);
+      final pref = await SharedPreferences.getInstance();
+      pref.setString("userId", user!.uuid);
+      pref.setBool("isLogged", true);
     } on STGAuthException catch (_) {
       rethrow;
     } catch(e) {
@@ -55,8 +72,16 @@ class Auth {
   Future signUpWithEmailPassword(String email, String password) async {
     final userCred = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     FirebaseAuth.instance.currentUser!.sendEmailVerification();
-    user = STGUser(email: email, equityInDollars: 222, uuid: userCred.user!.uid, name: "Test");
+    user = STGUser(email: email, equityInPercentage: 1, uuid: userCred.user!.uid, name: "Test");
     FirebaseFirestore.instance.collection("Users").doc(user!.uuid).set(user!.toMap());
   }
+
+  Future logOut() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setBool("isLogged", false);
+    pref.setString("userId", "");
+    user = null;
+  }
+
 
 }

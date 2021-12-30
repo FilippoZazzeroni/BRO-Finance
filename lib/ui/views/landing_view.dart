@@ -8,13 +8,18 @@ import 'package:brofinance/ui/reusableComponents/topBar/top_bar.dart';
 import 'package:brofinance/ui/reusableComponents/topBar/top_bar_size.dart';
 import 'package:brofinance/ui/shared/colors/website_colors.dart';
 import 'package:brofinance/ui/shared/currency_text_style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LandingView extends StatelessWidget {
 
   //MARK: init
 
-  const LandingView({Key? key}) : super(key: key);
+  const LandingView({Key? key, required this.topBar}) : super(key: key);
+
+  //MARK: properties
+
+  final TopBar topBar;
 
   //MARK: methods
 
@@ -54,7 +59,7 @@ class LandingView extends StatelessWidget {
             ],
           ),
 
-          TopBar(style: CurrencyStyle.title, size: TopBarSize.standard()),
+          topBar
         ],
       ),
     );
