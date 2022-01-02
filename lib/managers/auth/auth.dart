@@ -72,7 +72,7 @@ class Auth {
   Future signUpWithEmailPassword(String email, String password) async {
     final userCred = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     FirebaseAuth.instance.currentUser!.sendEmailVerification();
-    user = STGUser(email: email, equityInPercentage: 1, uuid: userCred.user!.uid, name: "Test");
+    user = STGUser(email: email, equityInPercentage: 0, uuid: userCred.user!.uid, name: "Test");
     FirebaseFirestore.instance.collection("Users").doc(user!.uuid).set(user!.toMap());
   }
 
@@ -83,5 +83,10 @@ class Auth {
     user = null;
   }
 
+  Future updateUserOnlineFromUpdatedLocalCopy() async {
+    if (user != null) {
+      FirebaseFirestore.instance.collection("Users").doc(user!.uuid).update(user!.toMap());
+    }
+  }
 
 }

@@ -26,6 +26,6 @@ class TopBarButton extends StatelessWidget with Navigatable, GlobalContext {
         child: Text(text, style: CurrencyStyle.description,));
   }
 
-  void pushPageRoute(Widget page) => pushRoute(globalContext, page);
+  void pushPageRoute(String route) => pushRoute(globalContext, route);
 }
 

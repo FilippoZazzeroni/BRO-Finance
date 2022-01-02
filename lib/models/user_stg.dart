@@ -12,11 +12,11 @@ class STGUser {
   final double equityInPercentage;
   final double totalDollars = 911.0;
   final String email;
-  final String name;
+  String? name;
 
   Map<String, dynamic> toMap() {
     return {
-      "name": name,
+      "name": name ?? "",
       "equityPercentage": equityInPercentage,
       "email": email,
       "uuid": uuid,

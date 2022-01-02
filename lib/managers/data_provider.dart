@@ -2,6 +2,7 @@
 
 
 import 'dart:convert';
+import 'package:brofinance/models/binance/binance_api.dart';
 import 'package:brofinance/models/binance/order.dart';
 import 'package:brofinance/models/binance/trade.dart';
 import 'package:brofinance/models/binance/trade_symbol.dart';
@@ -13,7 +14,7 @@ class DataProvider {
   //MARK: init
 
   DataProvider._private() {
-    _getCurrentTradesSymbol().then((value) => currentTradeSymbols = value);
+
   }
 
   //MARK: properties
@@ -30,19 +31,23 @@ class DataProvider {
 
   //MARK: methods
 
-  Future<List<TradeSymbol>> _getCurrentTradesSymbol() async {
+  void initialize() {
+    _getCurrentTradesSymbol();
+  }
+
+  void _getCurrentTradesSymbol() async {
     currentTradeAccount.clear();
     orders.clear();
     currentTradeSymbols.clear();
-    List<TradeSymbol> values = [];
+
     final jsonString = await rootBundle.loadString("files/trade_assets.json");
-    print(jsonString);
     final json = jsonDecode(jsonString) as List;
     for (var element in json) {
-      values.add(TradeSymbol(element["symbol"], currency1: element["currency1"], currency2: element["currency2"]));
+      currentTradeSymbols.add(TradeSymbol(element["symbol"], currency1: element["currency1"], currency2: element["currency2"]));
       orders.add(Order(element["order"]));
     }
-    return values;
+
+    await BinanceApi().getAllCurrentTrade();
   }
 
 }

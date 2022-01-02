@@ -8,10 +8,10 @@ import 'package:http/http.dart';
 import 'order.dart';
 
 class BinanceApi {
-  
+
+  //MARK: methods
   
   Future _getTradePrice(TradeSymbol trade, Order order) async {
-
     final response = await get(Uri.parse("https://api.binance.com/api/v3/trades?symbol=${trade.symbol}"));
     if (response.statusCode == 200) {
       final json = jsonDecode(response.body);

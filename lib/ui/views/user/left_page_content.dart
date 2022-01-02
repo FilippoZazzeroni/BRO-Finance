@@ -18,87 +18,85 @@ class LeftSidePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-
-        Text("Wallet in percentage of the equity value",
-          style: CurrencyStyle.description, textAlign: TextAlign.center,),
         VerticalSpace(20.0),
-
-
+        Text(
+          "Wallet in percentage of the equity value",
+          style: CurrencyStyle.description,
+          textAlign: TextAlign.center,
+        ),
         FutureBuilder(
             future: _constructBodyWithBinanceData(context),
             initialData: Column(
               children: [
                 VerticalSpace(20.0),
-                const Coin(radius: 60.0, asset: "assets/images/avax.png",)
+                const Coin(
+                  radius: 60.0,
+                  asset: "assets/images/avax.png",
+                )
               ],
             ),
             builder: (context, data) {
               return data.data! as Widget;
             }),
-
         _buildTotalAmountCell()
       ],
     );
   }
 
   Future<Widget> _constructBodyWithBinanceData(BuildContext context) async {
+    final bodyOfBinanceData = await _getBodyOfBinanceData();
+
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: ListView(
+        children: bodyOfBinanceData,
+      ),
+    ));
+  }
+
+  Future<List<Widget>> _getBodyOfBinanceData() async {
+    final gridChildren = await _getGridColumnWidgets();
     List<Widget> children = [];
+    children.add(SizedBox(
+      height: gridChildren[0].length * 115,
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, mainAxisExtent: gridChildren[0].length * 115),
+        children: [
+          Column(
+            children: [_buildTextCell("Currency value"), ...gridChildren[0]],
+          ),
+          Column(
+            children: [
+              _buildTextCell("Currency symbols"),
+              ...gridChildren[1],
+            ],
+          ),
+          Column(
+            children: [
+              _buildTextCell("owned"),
+              ...gridChildren[2],
+            ],
+          )
+        ],
+      ),
+    ));
+    return children;
+  }
+
+  Future<List<List<Widget>>> _getGridColumnWidgets() async {
     List<Widget> firstCol = [];
     List<Widget> secondCol = [];
     List<Widget> thirdCol = [];
-
-    await BinanceApi().getAllCurrentTrade();
 
     for (final element in DataProvider.shared.currentTradeAccount) {
       firstCol.add(_buildTextCell(element.price.toStringAsFixed(2)));
       secondCol.add(_buildCoinsCell(element));
       thirdCol.add(_buildTextCell(
-          "${element.getAmountInDollarsOfTrade(Auth.shared.user!)
-              .toStringAsFixed(2)} \$"));
+          "${element.getAmountInDollarsOfTrade(Auth.shared.user!).toStringAsFixed(2)} \$"));
     }
-
-    children.add(
-        SizedBox(
-          height: thirdCol.length * 110,
-          child: GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, mainAxisExtent: thirdCol.length * 110),
-            children: [
-
-              Column(
-                children: [
-                  _buildTextCell("Currency value"),
-                  ...firstCol
-                ],
-              ),
-
-              Column(
-                children: [
-                  _buildTextCell("Currency symbols"),
-                  ...secondCol,
-                ],
-              ),
-              Column(
-                children: [
-                  _buildTextCell("owned"),
-                  ...thirdCol,
-                ],
-              )
-
-            ],
-          ),
-        )
-    );
-
-
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: ListView(
-                  children: children,
-                ),
-            )
-    );
+    return [firstCol, secondCol, thirdCol];
   }
 
   Widget _buildTotalAmountCell() {
@@ -108,20 +106,24 @@ class LeftSidePage extends StatelessWidget {
       totOwnedAmount += trade.getAmountInDollarsOfTrade(Auth.shared.user!);
     }
 
-    return
-      Column(
-        children: [
-          VerticalSpace(20.0),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Total owned amount : ", style: CurrencyStyle.description,),
-              Text("${totOwnedAmount.toStringAsFixed(4)} \$",
-                style: CurrencyStyle.getDescriptionFrom(Colors.greenAccent),)
-            ],
-          ),
-        ],
-      );
+    return Column(
+      children: [
+        VerticalSpace(20.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Total owned amount : ",
+              style: CurrencyStyle.description,
+            ),
+            Text(
+              "${totOwnedAmount.toStringAsFixed(4)} \$",
+              style: CurrencyStyle.getDescriptionFrom(Colors.greenAccent),
+            )
+          ],
+        ),
+      ],
+    );
   }
 
   Widget _buildTextCell(String text) {
@@ -143,11 +145,10 @@ class LeftSidePage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Coin(
               radius: 55.0,
               asset:
-              "assets/images/${element.symbol.currency1.toLowerCase()}.png",
+                  "assets/images/${element.symbol.currency1.toLowerCase()}.png",
             ),
             Text(
               "  /  ",
@@ -156,7 +157,7 @@ class LeftSidePage extends StatelessWidget {
             Coin(
               radius: 55.0,
               asset:
-              "assets/images/${element.symbol.currency2.toLowerCase()}.png",
+                  "assets/images/${element.symbol.currency2.toLowerCase()}.png",
             ),
           ],
         ),

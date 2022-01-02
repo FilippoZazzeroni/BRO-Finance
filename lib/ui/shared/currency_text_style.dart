@@ -28,10 +28,10 @@ extension CurrencyStyle on TextStyle {
     );
   }
 
-  static TextStyle getDescriptionFrom(Color color, {double blurRadius = 5.0}) {
+  static TextStyle getDescriptionFrom(Color color, {double blurRadius = 5.0, double textSize = 30.0}) {
     return TextStyle(
         color: color,
-        fontSize: 30.0,
+        fontSize: textSize,
         fontFamily: "BebasNeue",
         shadows: [
           BoxShadow(

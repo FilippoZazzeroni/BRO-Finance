@@ -2,6 +2,7 @@ import 'package:brofinance/managers/auth/auth.dart';
 import 'package:brofinance/managers/auth/auth_exception.dart';
 import 'package:brofinance/mixins/loadable.dart';
 import 'package:brofinance/mixins/navigatable.dart';
+import 'package:brofinance/ui/shared/stg_router.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/reusableComponents/form/auth_form.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/rectangle_with_gradient.dart';
@@ -70,7 +71,7 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
                         setStateOfLoading(setState);
                         await Auth.shared.signInWithEmailPassword(_email, _password);
                         setStateOfLoading(setState);
-                        pushRoute(context, const UserView());
+                        pushRoute(context, STGRouter.userRoute);
                       } on STGAuthException catch (e) {
                         Fluttertoast.showToast(msg: e.message, timeInSecForIosWeb: 2);
                         setStateOfLoading(setState);

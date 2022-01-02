@@ -25,7 +25,7 @@ class LandingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DataProvider.shared;
+    DataProvider.shared.initialize();
     DataProvider.shared.context = context;
 
     return Scaffold(
