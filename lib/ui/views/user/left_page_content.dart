@@ -1,6 +1,5 @@
 import 'package:brofinance/managers/auth/auth.dart';
 import 'package:brofinance/managers/data_provider.dart';
-import 'package:brofinance/models/binance/binance_api.dart';
 import 'package:brofinance/models/binance/trade.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/vertical_space.dart';

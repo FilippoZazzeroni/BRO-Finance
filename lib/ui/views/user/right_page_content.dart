@@ -1,5 +1,4 @@
 import 'package:brofinance/managers/auth/auth.dart';
-import 'package:brofinance/models/stripe_connect.dart';
 import 'package:brofinance/ui/reusableComponents/coin.dart';
 import 'package:brofinance/ui/views/user/contribute_dialog.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/vertical_space.dart';
@@ -38,9 +37,8 @@ class RightPageContent extends StatelessWidget {
         VerticalSpace(20.0),
         Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: SColors.blueDark
-          ),
+              borderRadius: BorderRadius.circular(10.0),
+              color: SColors.blueDark),
           child: TextButton(
               onPressed: () {
                 STGDialog().showSTGDialog(context);

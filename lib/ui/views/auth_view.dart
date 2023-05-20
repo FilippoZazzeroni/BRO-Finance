@@ -12,10 +12,7 @@ import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'user/user_view.dart';
-
-class AuthView extends StatefulWidget  {
-
+class AuthView extends StatefulWidget {
   //MARK: init
 
   const AuthView({Key? key}) : super(key: key);
@@ -40,8 +37,12 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Coin(radius: MediaQuery.of(context).size.height / 4,),
-            const SizedBox(height: 40.0,),
+            Coin(
+              radius: MediaQuery.of(context).size.height / 4,
+            ),
+            const SizedBox(
+              height: 40.0,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 150.0),
               child: AuthForm(
@@ -60,35 +61,50 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
                 },
               ),
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(
+              height: 30,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
                     onPressed: () async {
-
                       try {
                         setStateOfLoading(setState);
-                        await Auth.shared.signInWithEmailPassword(_email, _password);
+                        await Auth.shared
+                            .signInWithEmailPassword(_email, _password);
                         setStateOfLoading(setState);
                         pushRoute(context, STGRouter.userRoute);
                       } on STGAuthException catch (e) {
-                        Fluttertoast.showToast(msg: e.message, timeInSecForIosWeb: 2);
+                        Fluttertoast.showToast(
+                            msg: e.message, timeInSecForIosWeb: 2);
                         setStateOfLoading(setState);
                       }
                     },
-                    child: isLoading ? const Coin(radius: 50.0,) : Text("Sign in", style: CurrencyStyle.description,)),
+                    child: isLoading
+                        ? const Coin(
+                            radius: 50.0,
+                          )
+                        : Text(
+                            "Sign in",
+                            style: CurrencyStyle.description,
+                          )),
                 TextButton(
                     onPressed: () async {
                       setStateOfLoading(setState);
-                      await Auth.shared.signUpWithEmailPassword(_email, _password);
+                      await Auth.shared
+                          .signUpWithEmailPassword(_email, _password);
                       setStateOfLoading(setState);
-                      Fluttertoast.showToast(msg: "Verification email sent", timeInSecForIosWeb: 2);
+                      Fluttertoast.showToast(
+                          msg: "Verification email sent",
+                          timeInSecForIosWeb: 2);
                     },
-                    child: Text("Sign up", style: CurrencyStyle.description,)),
+                    child: Text(
+                      "Sign up",
+                      style: CurrencyStyle.description,
+                    )),
               ],
             )
-
           ],
         ),
       ),

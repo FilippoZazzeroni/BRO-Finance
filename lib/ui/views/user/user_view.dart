@@ -1,12 +1,7 @@
-import 'package:brofinance/managers/auth/auth.dart';
-import 'package:brofinance/models/stripe_connect.dart';
-import 'package:brofinance/ui/reusableComponents/coin.dart';
-import 'package:brofinance/ui/views/user/contribute_dialog.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/rectangle_with_gradient.dart';
 import 'package:brofinance/ui/reusableComponents/shapes/shape_size.dart';
 import 'package:brofinance/ui/reusableComponents/topBar/top_bar_logged.dart';
 import 'package:brofinance/ui/shared/colors/website_colors.dart';
-import 'package:brofinance/ui/shared/currency_text_style.dart';
 import 'package:brofinance/ui/views/user/left_page_content.dart';
 import 'package:brofinance/ui/views/user/right_page_content.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +15,6 @@ class UserView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: RectangleWithGradient(
         size: ShapeSize.fullScreen(context),

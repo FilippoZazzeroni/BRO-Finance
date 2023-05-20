@@ -1,11 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'shape_size.dart';
 
 abstract class Shape extends StatelessWidget {
-
   //MARK: init
-  const Shape({Key? key ,required this.size, required this.child});
+  const Shape({Key? key, required this.size, required this.child})
+      : super(key: key);
 
   //MARK: properties
 
@@ -16,5 +15,4 @@ abstract class Shape extends StatelessWidget {
   //MARK: methods
   @override
   Widget build(BuildContext context);
-
 }

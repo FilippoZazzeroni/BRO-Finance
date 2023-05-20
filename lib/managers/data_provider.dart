@@ -1,6 +1,3 @@
-
-
-
 import 'dart:convert';
 import 'package:brofinance/models/binance/binance_api.dart';
 import 'package:brofinance/models/binance/order.dart';
@@ -10,12 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class DataProvider {
-
   //MARK: init
 
-  DataProvider._private() {
-
-  }
+  DataProvider._private();
 
   //MARK: properties
 
@@ -43,11 +37,11 @@ class DataProvider {
     final jsonString = await rootBundle.loadString("files/trade_assets.json");
     final json = jsonDecode(jsonString) as List;
     for (var element in json) {
-      currentTradeSymbols.add(TradeSymbol(element["symbol"], currency1: element["currency1"], currency2: element["currency2"]));
+      currentTradeSymbols.add(TradeSymbol(element["symbol"],
+          currency1: element["currency1"], currency2: element["currency2"]));
       orders.add(Order(element["order"]));
     }
 
     await BinanceApi().getAllCurrentTrade();
   }
-
 }
