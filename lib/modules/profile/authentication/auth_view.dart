@@ -1,11 +1,14 @@
 import 'package:brofinance/mixins/loadable.dart';
 import 'package:brofinance/mixins/navigatable.dart';
+import 'package:brofinance/modules/common/models/networking/standard_api_request.dart';
 import 'package:brofinance/modules/common/styles/colors/website_colors.dart';
 import 'package:brofinance/modules/common/styles/currency_text_style.dart';
+import 'package:brofinance/modules/common/view_controllers/view_model.dart';
 import 'package:brofinance/modules/common/views/coin.dart';
 import 'package:brofinance/modules/common/views/form/auth_form.dart';
 import 'package:brofinance/modules/common/views/shapes/rectangle_with_gradient.dart';
 import 'package:brofinance/modules/common/views/shapes/shape_size.dart';
+import 'package:brofinance/modules/profile/authentication/auth_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -18,11 +21,13 @@ class AuthView extends StatefulWidget {
   State<AuthView> createState() => _AuthViewState();
 }
 
-class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
+class _AuthViewState extends State<AuthView> with Navigatable {
   //MARK: properties
   String _email = "";
 
   String _password = "";
+
+  final _authViewController = AuthViewController(apiRequest: StandardApiRequest());
 
   //MARK: methods
   @override
@@ -61,31 +66,35 @@ class _AuthViewState extends State<AuthView> with Navigatable, Loadable {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                    onPressed: () async {},
-                    child: isLoading
-                        ? const Coin(
-                            radius: 50.0,
-                          )
-                        : Text(
-                            "Sign in",
+            StreamBuilder<ViewModel>(
+                stream: _authViewController.eventsStream.stream,
+                builder: (context, snapshot) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                          onPressed: () {
+                            _authViewController.signUp(email: _email, password: _password);
+                          },
+                          child: snapshot.data?.isLoading ?? false
+                              ? const Coin(
+                                  radius: 50.0,
+                                )
+                              : Text(
+                                  "Sign in",
+                                  style: CurrencyStyle.description,
+                                )),
+                      TextButton(
+                          onPressed: () {
+                            _authViewController.signIn(email: _email, password: _password);
+                          },
+                          child: Text(
+                            "Sign up",
                             style: CurrencyStyle.description,
                           )),
-                TextButton(
-                    onPressed: () async {
-                      setStateOfLoading(setState);
-                      setStateOfLoading(setState);
-                      Fluttertoast.showToast(msg: "Verification email sent", timeInSecForIosWeb: 2);
-                    },
-                    child: Text(
-                      "Sign up",
-                      style: CurrencyStyle.description,
-                    )),
-              ],
-            )
+                    ],
+                  );
+                }),
           ],
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:brofinance/models/binance/trade_symbol.dart';
-import 'package:brofinance/models/user_stg.dart';
-
+import 'package:brofinance/modules/common/models/user/user.dart';
 import 'order.dart';
 
 class Trade {
@@ -19,7 +18,7 @@ class Trade {
 
   //MARK: methods
 
-  double getAmountInDollarsOfTrade(STGUser user) {
-    return user.equityInPercentage * order.numberOfCoins * price;
+  double getAmountInDollarsOfTrade(User user) {
+    return 0.0;
   }
 }
