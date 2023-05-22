@@ -5,7 +5,7 @@ class EndPoints {
 
   //MARK: methods
 
-  static String singIn() => "${_baseUrl}users/tokens/sing_in";
+  static String singIn() => "${_baseUrl}users/tokens/sign_in";
 
   static String signUp() => "${_baseUrl}users/tokens/sign_up";
 }

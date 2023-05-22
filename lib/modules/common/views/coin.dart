@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 class Coin extends StatefulWidget {
   //MARK: init
 
-  const Coin(
-      {Key? key, required this.radius, this.asset = "assets/images/logo.png"})
-      : super(key: key);
+  const Coin({Key? key, required this.radius, this.asset = "assets/images/logo.png"}) : super(key: key);
 
   //MARK: properties
 
@@ -19,14 +17,12 @@ class Coin extends StatefulWidget {
   _CoinState createState() => _CoinState();
 }
 
-class _CoinState extends State<Coin>
-    with SingleTickerProviderStateMixin, Navigatable {
+class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Navigatable {
   AnimationController? _controller;
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 5));
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 5));
     _controller?.repeat();
     super.initState();
   }
@@ -41,6 +37,7 @@ class _CoinState extends State<Coin>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      key: const Key("coin tap gesture"),
       onTap: () {
         pushRoute(context, STGRouter.homeRoute);
       },

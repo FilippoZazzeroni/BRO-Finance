@@ -21,11 +21,11 @@ class TopBarButton extends StatelessWidget with Navigatable {
         onPressed: () {
           onPressed();
         },
-        child: Text(
-          text,
-          style: CurrencyStyle.description,
+        child: FittedBox(
+          child: Text(
+            text,
+            style: CurrencyStyle.description,
+          ),
         ));
   }
-
-  void pushPageRoute(String route) {}
 }

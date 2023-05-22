@@ -33,7 +33,7 @@ class TopBarLogged extends TopBar {
           ),
           TopBarButton(
             onPressed: () {
-              pushRoute(context, STGRouter.contributeRoute);
+              pushRoute(context, STGRouter.cryptoServiceRoute);
             },
             text: "crypto service",
           ),
