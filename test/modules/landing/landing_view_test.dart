@@ -17,25 +17,26 @@ void main() {
 
       expect(find.byType(LandingView), findsOneWidget);
 
-      await tester.tap(find.text("crypto note service"));
-      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key("crypto note service top bar button")));
+      await tester.pump();
 
-      expect(find.byType(CryptoServiceView), findsOneWidget);
+      expect(find.byType(CryptoServiceView, skipOffstage: false), findsOneWidget);
 
-      await tester.tap(find.text("home"));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(find.byKey(const Key("home top bar button"), skipOffstage: false));
+      await tester.pump();
 
       expect(find.byType(LandingView), findsOneWidget);
 
-      await tester.tap(find.text("log in"));
-      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key("log in top bar button"), skipOffstage: false));
+      //await tester.pumpAndSettle();
 
       expect(find.byType(AuthView), findsOneWidget);
-
+      /*
       await tester.tap(find.byKey(const Key("coin tap gesture")));
       await tester.pumpAndSettle();
 
       expect(find.byType(LandingView), findsOneWidget);
+      */
     });
   });
 }

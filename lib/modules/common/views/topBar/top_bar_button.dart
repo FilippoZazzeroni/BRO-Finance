@@ -18,6 +18,7 @@ class TopBarButton extends StatelessWidget with Navigatable {
   @override
   Widget build(BuildContext context) {
     return TextButton(
+        key: Key("$text top bar button"),
         onPressed: () {
           onPressed();
         },

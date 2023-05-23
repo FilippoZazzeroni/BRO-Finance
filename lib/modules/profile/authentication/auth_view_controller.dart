@@ -35,7 +35,7 @@ class AuthViewController extends ViewController {
   }
 
   void signUp({required String email, required String password}) async {
-    eventsStream.sink.add(ViewModel(isLoading: true));
+    eventsStream.sink.add(const ViewModel(isLoading: true));
     final requestBody = {"email": email, "password": password};
     final response = await apiRequest
         .perform(ApiConfiguration(endPoint: EndPoints.signUp(), type: RequestType.post, body: requestBody));

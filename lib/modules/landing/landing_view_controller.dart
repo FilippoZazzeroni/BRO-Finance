@@ -15,7 +15,7 @@ class LandingViewController extends ViewController {
         object: this,
         notificationName: Notifications.authViewDidLogin,
         callback: (data) {
-          eventsStream.sink.add(ViewModel<bool>(model: true));
+          eventsStream.sink.add(const ViewModel<bool>(model: true));
         });
   }
 

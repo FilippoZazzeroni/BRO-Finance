@@ -28,8 +28,8 @@ class NotificationCenter {
   }
 
   void post({required String notificationName, Object? data}) {
-    _observers[notificationName]?.entries.forEach((element) {
-      element.value(data);
+    _observers[notificationName]?.forEach((key, value) {
+      value(data);
     });
   }
 }

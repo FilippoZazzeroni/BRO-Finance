@@ -39,7 +39,7 @@ class _CoinState extends State<Coin> with SingleTickerProviderStateMixin, Naviga
     return GestureDetector(
       key: const Key("coin tap gesture"),
       onTap: () {
-        pushRoute(context, STGRouter.homeRoute);
+        pushRouteAndRemoveCurrentInStack(context, STGRouter.homeRoute);
       },
       child: Container(
         color: Colors.transparent,

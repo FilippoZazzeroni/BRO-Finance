@@ -41,25 +41,25 @@ class TopBar extends StatelessWidget with Navigatable {
                 TopBarButton(
                   text: "home",
                   onPressed: () {
-                    pushRoute(context, STGRouter.homeRoute);
+                    pushRouteAndRemoveCurrentInStack(context, STGRouter.homeRoute);
                   },
                 ),
                 TopBarButton(
                   text: "use cases",
                   onPressed: () {
-                    pushRoute(context, STGRouter.cryptoServiceRoute);
+                    pushRouteAndRemoveCurrentInStack(context, STGRouter.cryptoServiceRoute);
                   },
                 ),
                 TopBarButton(
                   text: "crypto note service",
                   onPressed: () {
-                    pushRoute(context, STGRouter.cryptoServiceRoute);
+                    pushRouteAndRemoveCurrentInStack(context, STGRouter.cryptoServiceRoute);
                   },
                 ),
                 TopBarButton(
                   text: "log in",
                   onPressed: () {
-                    pushRoute(context, STGRouter.authRoute);
+                    pushRouteAndRemoveCurrentInStack(context, STGRouter.authRoute);
                   },
                 ),
               ],
